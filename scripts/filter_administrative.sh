@@ -5,19 +5,19 @@ if ${IMPORT_ADMINISTRATIVE}; then
   FILTER_THREADS=$(((${BUILD_THREADS} < 3 ? 3 : ${BUILD_THREADS}) / 3))
   osmosis -v \
     --read-pbf-fast workers=${FILTER_THREADS} /srv/nominatim/src/data.osm.pbf \
-    --tf accept-nodes "place=suburb" "place=town" "place=village" "boundary=administrative" "boundary=administrative" \
+    --tf accept-nodes "place=suburb" "place=town" "place=village" "place=locality" "place=county" "place=hamlet" "boundary=administrative" "boundary=administrative" \
     --tf reject-relations \
     --tf reject-ways \
     --write-pbf file=/srv/nominatim/src/nodes.osm.pbf &
   osmosis -v \
     --read-pbf-fast workers=${FILTER_THREADS} /srv/nominatim/src/data.osm.pbf \
-    --tf accept-ways "place=suburb" "place=town" "place=village" "boundary=administrative" \
+    --tf accept-ways "place=suburb" "place=town" "place=village" "place=locality" "place=county" "place=hamlet" "boundary=administrative" \
     --tf reject-relations  \
     --used-node \
     --write-pbf file=/srv/nominatim/src/ways.osm.pbf &
   osmosis -v \
     --read-pbf-fast workers=${FILTER_THREADS} /srv/nominatim/src/data.osm.pbf \
-    --tf accept-relations "place=suburb" "place=town" "place=village" "boundary=administrative" \
+    --tf accept-relations "place=suburb" "place=town" "place=village" "place=locality" "place=county" "place=hamlet" "boundary=administrative" \
     --used-node \
     --used-way \
     --write-pbf file=/srv/nominatim/src/relations.osm.pbf &
